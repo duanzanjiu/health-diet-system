@@ -1,0 +1,55 @@
+# ============================================================
+# 这是【模板文件】，可以安全提交到 git。
+# 真正使用的配置文件是同目录下的 application.yml（已被 .gitignore 忽略）。
+#
+# 新环境怎么用：
+#   1. 把本文件复制一份，重命名为 application.yml
+#   2. 把下面所有 "改成你自己的" 占位符替换成真实值
+# ============================================================
+
+server:
+  port: 5500
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/comingwindy?useSSL=false&serverTimezone=UTC
+    username: root
+    password: 改成你自己的数据库密码
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # ---------------- 大模型（Spring AI + DeepSeek）----------------
+  ai:
+    openai:
+      # 建议用环境变量，别把真实 key 写死在文件里：
+      #   IDEA：Run/Debug Configurations -> Environment variables 里加 DEEPSEEK_API_KEY
+      #   写法：api-key: ${DEEPSEEK_API_KEY}
+      # 下面这行是"图省事"的写法，仅限本地开发，且本文件不要提交！
+      api-key: sk-在这里填你自己的DeepSeek API Key
+      base-url: https://api.deepseek.com
+      chat:
+        completions-path: /v1/chat/completions
+        options:
+          tool-calling:
+            enabled: true
+        model: deepseek-flash
+
+  servlet:
+    multipart:
+      max-file-size: 10MB        # 单个文件上限
+      max-request-size: 20MB     # 整个请求上限
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+jwt:
+  secret: 改成你自己的JWT密钥（长度要够，HS512 建议 64 字节以上）
+  expiration: 86400000           # token 有效期 24 小时（毫秒）
+
+file:
+  path-path: ./uploads/
+
+# 调试大模型调用时打开：控制台会打印发给模型和模型返回的原文
+# logging:
+#   level:
+#     org.springframework.ai: DEBUG
