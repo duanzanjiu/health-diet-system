@@ -1,0 +1,62 @@
+# ============================================================
+#  健康饮食管理系统 (healthyboy) — 根目录忽略规则
+# ============================================================
+
+# ---------- 密钥 / 本地配置（绝对不能提交）----------
+# 后端本地配置：内含 DeepSeek API Key、数据库密码、JWT 密钥
+backed/src/main/resources/application.yml
+# 环境变量文件
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# ---------- 后端 ----------
+backed/target/
+backed/mvnw.txt
+# 用户上传的文件（运行期产物，含真实用户头像，不进仓库）
+# 注意：必须写 uploads/* 而不是 uploads/，否则目录被整体排除后，
+# 下面的 ! 白名单不生效，项目自带的演示图会被一起丢掉。
+backed/uploads/*
+!backed/uploads/food_*.png
+!backed/uploads/recipe_*.png
+# IDE / 工具
+backed/.idea/
+backed/.vscode/
+backed/.settings/
+backed/.classpath
+backed/.project
+backed/.apt_generated
+backed/viz/
+*.log
+logs/
+
+# ---------- 前端 ----------
+healthy_system/node_modules/
+healthy_system/dist/
+healthy_system/dist-ssr/
+healthy_system/.vite/
+healthy_system/*.local
+healthy_system/.idea/
+healthy_system/.vscode/*
+!healthy_system/.vscode/extensions.json
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ---------- 操作系统 ----------
+.DS_Store
+Thumbs.db
+desktop.ini
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ---------- 与项目无关的本地资料（个人文件，不进开源仓库）----------
+# 秋招/简历等个人文档与 PDF 构建脚本
+pdf_build/
+echarts/
+.vscode/
